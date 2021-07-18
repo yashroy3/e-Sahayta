@@ -2,7 +2,7 @@ import React from 'react'
 
 import {Card,CardActions,CardContent,CardMedia,Button,Typography} from '@material-ui/core';
 
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import useStyles from './styles';
@@ -19,7 +19,6 @@ function Post({post,setCurrentId}) {
             <CardMedia className={classes.media} image={post.selectedFile} title={post.title}/>
             <div className={classes.overlay}>
                 <Typography variant="h6">{post.creator}</Typography>
-                <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
                 <Button 
@@ -40,7 +39,7 @@ function Post({post,setCurrentId}) {
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" 
                     onClick={() => dispatch(likePost(post._id))}
-                ><ThumbUpAltIcon fontSize="small" />&nbsp; Like &nbsp; {post.likeCount} </Button>
+                ><ArrowUpwardIcon fontSize="small" />&nbsp; UpVote &nbsp; {post.likeCount} </Button>
                 <Button size="small" color="primary" 
                     onClick={() => dispatch(deletePost(post._id))}
                 ><DeleteIcon fontSize="small" /> Delete</Button>

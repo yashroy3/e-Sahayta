@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import Web3 from 'web3';
 
-//import memories from './images/memories.png';
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 
@@ -59,6 +58,7 @@ function App() {
       // Network ID
       const networkId = await web3.eth.net.getId()
       const networkData = SimpleStorageContract.networks[networkId]
+      console.log(networkData);
       if(networkData) {
         const simplestorage = new web3.eth.Contract(SimpleStorageContract.abi, networkData.address)
         setsimplestorage(simplestorage)
@@ -92,7 +92,7 @@ function App() {
     function uploadFile(title,file){
      
         setloading(true)
-        simplestorage.methods.uploadFile(file, title).send({ from: {account} }).on('transactionHash', (hash) => {
+        simplestorage.methods.uploadFile(1,file, title).send({ from: account }).on('transactionHash', (hash) => {
           setloading(false)
         })
 
@@ -102,9 +102,8 @@ function App() {
     return (
       <Container maxidth='lg'>
         <AppBar className={classes.appBar} position="static" color="inherit" >
-          <Typography className={classes.heading} variant="h2" align="center">Memories {account}</Typography>
-            {/* <img src={memories} alt='memories' height='60'/> */}
-            {/* Put image in images folder */}
+          <Typography className={classes.heading} variant="h4" align="center" style={{marginLeft:'1%'}}>e-Sahayta</Typography>
+          <Typography className={classes.heading} variant="h6" style={{marginLeft:'40%',marginTop:'1%'}} >{account}</Typography>
         </AppBar>
         <Grow in>
           {/* Privides animations */}
@@ -120,7 +119,6 @@ function App() {
           </Container>
 
         </Grow>
-        <input type='file' accept=".jpg" onChange={captureFile}  />
       </Container>
   )
 }
